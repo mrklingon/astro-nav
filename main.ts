@@ -12,9 +12,37 @@ function Show_XY (xx: number, yy: number) {
         }
     }
 }
+input.onGesture(Gesture.LogoUp, function () {
+    Y += -1
+    if (Y < 0) {
+        Y = 0
+    }
+    Show_XY(X, Y)
+})
 function Find_Spot (Xl: number, Yl: number) {
     return Uni[Xl + Yl * D]
 }
+input.onGesture(Gesture.TiltLeft, function () {
+    X += -1
+    if (X < 0) {
+        X = 0
+    }
+    Show_XY(X, Y)
+})
+input.onGesture(Gesture.TiltRight, function () {
+    X += 1
+    if (X > D - 4) {
+        X = D - 4
+    }
+    Show_XY(X, Y)
+})
+input.onGesture(Gesture.LogoDown, function () {
+    Y += 1
+    if (Y > D - 4) {
+        Y = D - 4
+    }
+    Show_XY(X, Y)
+})
 function BuildUni (Diam: number) {
     Uni = []
     for (let index = 0; index < Diam * Diam; index++) {
@@ -26,9 +54,11 @@ function BuildUni (Diam: number) {
     }
 }
 let Uni: number[] = []
+let X = 0
+let Y = 0
 let D = 0
 D = 20
 BuildUni(D)
-let Y = 0
-let X = 0
+Y = 0
+X = 0
 Show_XY(X, Y)
