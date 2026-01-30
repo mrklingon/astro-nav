@@ -29,6 +29,48 @@ input.onGesture(Gesture.TiltLeft, function () {
     }
     Show_XY(X, Y)
 })
+function flash () {
+    for (let index = 0; index < 3; index++) {
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        basic.pause(100)
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . # . .
+            . . . . .
+            . . . . .
+            `)
+        basic.pause(100)
+        basic.showLeds(`
+            . . . . .
+            . # . # .
+            . . . . .
+            . # . # .
+            . . . . .
+            `)
+        basic.pause(100)
+        basic.showLeds(`
+            # . . . #
+            . . . . .
+            . . . . .
+            . . . . .
+            # . . . #
+            `)
+    }
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+}
 input.onGesture(Gesture.TiltRight, function () {
     X += 1
     if (X > D - 4) {
@@ -44,6 +86,7 @@ input.onGesture(Gesture.LogoDown, function () {
     Show_XY(X, Y)
 })
 function BuildUni (Diam: number) {
+    flash()
     Uni = []
     for (let index = 0; index < Diam * Diam; index++) {
         if (6 < randint(0, 10)) {
@@ -53,6 +96,9 @@ function BuildUni (Diam: number) {
         }
     }
 }
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    BuildUni(D)
+})
 let Uni: number[] = []
 let X = 0
 let Y = 0
